@@ -1,14 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import axios from "axios";
 import "./App.css";
 
 function App() {
   const [pokList, setPokList] = useState([]);
-  const fetchPokemonName = async () => {
-    const response = await fetch(
-      " https://pokeapi.co/api/v2/pokemon?limit=807"
-    );
-    const json = await response.json();
-    setPokList(json.results);
+  const fetchPokemonName = () => {
+    axios
+      .get(" https://pokeapi.co/api/v2/pokemon?limit=807")
+      .then((response) => setPokList(response.data.results));
   };
   return (
     <div className="App">
